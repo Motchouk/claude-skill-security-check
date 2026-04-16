@@ -1,0 +1,31 @@
+{
+  "name": "security-check",
+  "version": "1.0.0",
+  "description": "Audit des dépendances Composer/npm contre les CVE publiques (OSV.dev + CISA KEV). Génère un rapport par sévérité et applique les bumps patch/minor sur demande.",
+  "author": {
+    "name": "Timothée Garnaud",
+    "url": "https://github.com/Motchouk"
+  },
+  "homepage": "https://github.com/Motchouk/claude-skill-security-check",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Motchouk/claude-skill-security-check.git"
+  },
+  "license": "GPL-3.0",
+  "keywords": [
+    "security",
+    "cve",
+    "composer",
+    "npm",
+    "audit",
+    "vulnerabilities",
+    "osv",
+    "cisa-kev"
+  ],
+  "skills": [
+    "skills/security-check"
+  ],
+  "requirements": {
+    "python": ">=3.8"
+  }
+}
