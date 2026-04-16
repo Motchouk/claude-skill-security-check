@@ -1,6 +1,6 @@
 {
   "name": "security-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Audit des dépendances Composer/npm contre les CVE publiques (OSV.dev + CISA KEV). Génère un rapport par sévérité et applique les bumps patch/minor sur demande.",
   "author": {
     "name": "Timothée Garnaud",
