@@ -142,6 +142,10 @@ Les issues et PR sont bienvenues :
 - Export du rapport (JSON, SARIF, HTML)
 - Intégration CI (GitHub Actions, GitLab CI)
 
+## Confidentialité
+
+Le skill n'envoie aucune donnée personnelle : uniquement des couples `(nom_paquet, version)` à OSV.dev et une requête GET publique à CISA KEV. Détails dans [PRIVACY.md](PRIVACY.md).
+
 ## Licence
 
 [GPL-3.0](LICENSE)
