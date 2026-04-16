@@ -11,10 +11,10 @@ Quand tu tapes `/security-check` dans Claude Code depuis un projet :
 1. **Détection auto** des lock files : `composer.lock`, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`
 2. **Scan** des paquets installés contre [OSV.dev](https://osv.dev/) (base unifiée qui agrège GHSA, Packagist, npm, PyPI, etc.)
 3. **Cross-check** des CVE remontées avec le catalogue [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) pour flagger celles qui sont exploitées dans la nature
-4. **Résolution sémantique** : pour chaque vuln, identifie la plus petite version corrigée dans la bonne branche semver (ex : 7.1.11 → 7.3.7, pas 5.4.50)
+4. **Résolution sémantique** : pour chaque vulnérabilité, identifie la plus petite version corrigée dans la bonne branche semver (ex : 7.1.11 → 7.3.7, pas 5.4.50)
 5. **Classification** du bump requis : `patch` / `minor` / `major` / `pas de correctif`
 6. **Rapport markdown** trié par sévérité, avec indicateur 🔥 sur les CVE exploitées
-7. **Application automatique** (si `--apply`) des bumps patch et minor via `composer update` ou `npm update`, après confirmation. **Les majors restent toujours manuels** pour éviter de casser l'API.
+7. **Application automatique** (si `--apply`) des bumps patch et minor via `composer update` ou `npm update`, après confirmation. **Les majors restent toujours manuels** pour éviter les risque de breaking change et/ou de dépendances incompatibles.
 
 ## Installation
 
@@ -26,19 +26,17 @@ cd claude-skill-security-check
 ./install.sh              # niveau utilisateur → ~/.claude/skills/security-check/
 ```
 
-Puis redémarre Claude Code (ou recharge la session).
+Après redémarrage Claude Code (ou recharge de la session).
 
 ### Options d'installation
 
 ```bash
-./install.sh --project    # Installe dans le projet courant (./.claude/skills/)
-./install.sh --force      # Écrase une install existante sans prompt
-./install.sh --uninstall  # Supprime l'installation (user + project)
+./install.sh --project    # Installer dans le projet courant (./.claude/skills/)
+./install.sh --force      # Écraser une install existante sans prompt
+./install.sh --uninstall  # Supprimer l'installation (user + project)
 ```
 
 ### Installation manuelle
-
-Si tu préfères éviter le script :
 
 ```bash
 # Niveau utilisateur
@@ -129,18 +127,18 @@ Le catalogue KEV est mis en cache 24 h dans `/tmp/security-check-cache/` pour é
 
 ## Portabilité
 
-Le skill fonctionne tel quel sur n'importe quel projet :
+Le skill fonctionne sur les type de projets suivants :
 
-- **Backend PHP** (Composer seul) ✅
-- **Frontend JS** (npm/yarn/pnpm seul) ✅
-- **Fullstack** (les deux dans un même repo) ✅ — agrégé dans un seul rapport
-- **Projet en conteneur Docker** (ex. Symfony + FrankenPHP) ✅ — détecte automatiquement `make exec` si disponible
+- **Backend PHP** (Composer)
+- **Frontend JS** (npm/yarn/pnpm seul)
+- **Fullstack** (PHP + JS dans le même répository) — agrégé dans un seul rapport
+- **Projet en conteneur Docker** (ex. Symfony + FrankenPHP) — détecte automatiquement `make exec` si disponible
 
 ## Contribuer
 
 Les issues et PR sont bienvenues :
 
-- Nouveaux écosystèmes (PyPI, RubyGems, Cargo, Go modules) — OSV.dev les supporte déjà, il suffit d'ajouter un parser
+- Nouveaux écosystèmes (PyPI, RubyGems, Cargo, Go modules) — OSV.dev les supporte déjà, il faut ajouter un parser dédié
 - Export du rapport (JSON, SARIF, HTML)
 - Intégration CI (GitHub Actions, GitLab CI)
 
